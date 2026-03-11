@@ -1,20 +1,46 @@
-def fibonacci(n):
-    """
-    Recursive Fibonacci function.
-    Returns the nth Fibonacci number.
-    
-    Args:
-        n: A non-negative integer
-        
-    Returns:
-        The nth Fibonacci number
-    """
-    if n <= 1:
-        return n
-    return fibonacci(n - 1) + fibonacci(n - 2)
+import random
 
+def pick_word():
+ words =["pizza", "burger", "sushi", "waffle", "fish", "steak"]
+ return random.choice(words)
 
-if __name__ == "__main__":
-    # Test the function
-    for i in range(10):
-        print(f"fibonacci({i}) = {fibonacci(i)}")
+def display_word(secret_word, geussed_letters):
+ result = ""
+ for letter in secret_word:
+  if letter in geussed_letters:
+   result += letter + " "
+  else:
+   result += "_ "
+ print(result.strip())
+
+def validate_input():
+ guess = input("Guess a letter: ").lower()
+ while len(guess) != 1 or not guess.isalpha():
+  guess = input("Enter a single letter: ").lower()
+ return guess
+def play_game():
+    secret_word = pick_word()
+    guessed_letters = []
+    turns_left = 6
+
+    while turns_left > 0:
+        display_word(secret_word, guessed_letters)
+        print("Turns left:", turns_left)
+        guess = validate_input()
+
+        if guess in guessed_letters:
+            print("Already guessed.")
+            continue
+        guessed_letters.append(guess)
+
+        if guess not in secret_word:
+            turns_left -= 1
+            print("Wrong guess.")
+
+        if all(letter in guessed_letters for letter in secret_word):
+            print("You won! The word was:", secret_word)
+            return
+
+    print("You lost! The word was:", secret_word)
+
+play_game()
