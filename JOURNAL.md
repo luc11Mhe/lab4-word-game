@@ -4,6 +4,68 @@
 
 ---
 
+## Phase 4: Unit Testing with unittest
+
+**Date**: 03-12-2026
+
+### Session Summary
+Created comprehensive test suite using Python's `unittest` framework with mock-based testing for IO-dependent functions.
+
+### Interactions
+
+**Prompt 1**: "write a test_game.py using unittest. I want to test two things: that the random word is actually a string, and that the masking logic correctly turns..."
+
+**User Contributions**: 
+- Understood the need for type checking with `isinstance(word, str)`
+- Identified two specific test scenarios: type validation and masking logic
+
+**AI Response**: Socratic guidance on testing strategy:
+- Discussed two approaches for testing `display_word()`: mocking vs. refactoring
+- Asked clarifying questions about test case coverage
+
+**User Choice**: Selected Option 1 (mock print output) over refactoring
+
+---
+
+**Prompt 2**: "Arguments: secret_word='BURGER', guessed_letters=['B', 'R', 'E'], Expected Print: B _ R _ E _"
+
+**User Contributions**:
+- Designed concrete test case with specific inputs and expected outputs
+- Thought through the masking logic and what the output should display
+
+**AI Response**: 
+- Clarified case sensitivity consideration (game uses `.lower()` on input)
+- Suggested lowercase for realistic test scenarios
+- Provided test method template pattern
+
+---
+
+**Prompt 3**: "how do i make a test to display the full word"
+
+**AI Response**: Guided discovery of unique letters in "burger"
+
+**User Contributions**:
+- Applied the pattern independently to a new test case
+- Identified the need for comprehensive letter coverage
+
+**Prompt 4**: ("alr add the code i guess")
+
+**AI Implementation**: Created final `test_game.py` with all three test methods
+
+**Outcome**: Created `test_game.py` with three unit tests:
+1. `test_pick_word_is_string()` - Verifies `pick_word()` returns non-empty string
+2. `test_display_word_partial_guess()` - Tests masking with partial guesses (`b _ r _ e r`)
+3. `test_display_word_all_letters_guessed()` - Tests masking with complete word (`b u r g e r`)
+
+**Key Technical Decisions**:
+- Used `from unittest.mock import patch` to intercept `print()` calls
+- Removed unused `StringIO` import
+- Added `__main__` guard for standalone test execution
+
+**File Created**: `test_game.py` (20 lines, 3 test methods)
+
+---
+
 ## Phase 1: Core Game Logic & Design
 
 **Date**: 03-11-2026  
