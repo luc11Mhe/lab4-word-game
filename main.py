@@ -1,4 +1,5 @@
 import random
+import string
 
 def pick_word():
  words =["pizza", "burger", "sushi", "waffle", "fish", "steak"]
@@ -18,7 +19,12 @@ def validate_input():
  while len(guess) != 1 or not guess.isalpha():
   guess = input("Enter a single letter: ").lower()
  return guess
+
+def get_auto_guess(guessed_letters):
+  remaining = []
+
 def play_game():
+    mode = input("Type Auto to activate the auto play mode: ")
     secret_word = pick_word()
     guessed_letters = []
     turns_left = 6
